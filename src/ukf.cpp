@@ -213,15 +213,15 @@ void UKF::Prediction(double delta_t) {
 	MatrixXd Xsig_aug = MatrixXd(n_aug_, 2 * n_aug_ + 1);
 	Xsig_aug.col(0) = x_aug;
 
-	double lambda_r = std::sqrt(lambda_ + n_aug_);
+	double lambda_R = std::sqrt(lambda_ + n_aug_);
 
 	for (int index = 0; index < n_aug_; ++index)
 	{
 		Xsig_aug.col(index + 1) =
-			x_aug + (lambda_r * P_aug_root.col(index));
+			x_aug + (lambda_R * P_aug_root.col(index));
 
 		Xsig_aug.col(index + n_aug_ + 1) =
-			x_aug - (lambda_r * P_aug_root.col(index));
+			x_aug - (lambda_R * P_aug_root.col(index));
 	}
 	/////aug_sigma_point matrix created
 
